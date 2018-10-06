@@ -21,7 +21,6 @@ If you want to test the bot by creating your personal istance, follow this steps
 
 - Python 3
 - python-pip
-- language-pack-it
 
 #### To install with *pip*
 
