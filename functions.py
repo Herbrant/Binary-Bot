@@ -17,3 +17,8 @@ with open('config/settings.yaml', 'r') as yaml_config:
 
 # Token of your telegram bot that you created from @BotFather, write it on token.conf
 TOKEN = tokenconf
+
+
+#Start function
+def start(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id, text="Hi! I'm Binary Bot and I can manipulate binary number. If you want to know what you can do, use /help")
