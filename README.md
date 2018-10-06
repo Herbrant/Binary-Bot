@@ -31,24 +31,9 @@ If you want to test the bot by creating your personal istance, follow this steps
 #### How to use
 
 First of all configure the file Dockerfile, add the API TOKEN in \_TOKEN\_ (line 6).
+Run from shell:
 
-Build image dmibot with docker:
-
-```
-$ docker build -t dmibot .
-```
-
-Run the container dmibot:
-
-```
-$ docker run -it dmibot
-```
-
-Now you can go to the dmibot directory and run the bot:
-
-```
-$ cd /usr/local/dmibot/
-$ python main.py
+$ python3 main.py
 ```
 
 ### License
