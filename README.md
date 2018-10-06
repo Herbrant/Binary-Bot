@@ -31,7 +31,7 @@ If you want to test the bot by creating your personal istance, follow this steps
 
 First of all configure the file Dockerfile, add the API TOKEN in \_TOKEN\_ (line 6).
 Run from shell:
-
+```
 $ python3 main.py
 ```
 
