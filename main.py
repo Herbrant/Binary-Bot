@@ -11,8 +11,6 @@ with open('config/settings.yaml') as yaml_config:
 def main():
 	updater = Updater(TOKEN)
 	dp = updater.dispatcher
-	#dp.add_handler(MessageHandler(Filters.all, logging_message), 1)
-	#dp.add_handler(CallbackQueryHandler(button_handler))
 
 	#Bot Command
 	dp.add_handler(CommandHandler('start', start))
