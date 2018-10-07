@@ -9,6 +9,7 @@ from telegram.error import (TelegramError, Unauthorized, BadRequest, TimedOut, C
 # System libraries
 import yaml
 import re
+import heapq
 
 # Token
 tokenconf = open('config/token.conf', 'r').read()
@@ -31,13 +32,16 @@ class binary:
         return binary(self.number * other.number)   #Use relative function
     def __truediv__(self, other):
         return binary(self.number / other.number)   #Use relative function
+    def __str__(self):      #String rappresentation
+        return self.number
 
 #Class Operation
 class operation:
-    def __init__(self, num1, num2, op):
+    def __init__(self, num1, num2, op, priority):
         self.num1 = num1
         self.num2 = num2
         self.op = op
+        self.priority = priority
     def result(self):
         if self.op== '+':
             return self.num1 + self.num2
@@ -49,6 +53,29 @@ class operation:
             return self.num1 / self.num2
         else:
             return "-1"
+    #Overloading operator
+    def __eq__(self, other):
+        if self.priority == other.priority:
+            return True
+        return False
+    def __gt__(self, other):
+        if self.priority > other.priority:
+            return True
+        return False
+    def __lt__(self, other):
+        if self.priority < other.priority:
+            return True
+        return False
+    def __ge__(self, other):
+        if self > other | self == other:
+            return True
+        return False
+    def __le__(self, other):
+        if self < other | self == other:
+            return True
+        return False
+
+
 
 
 #Start function
@@ -57,4 +84,5 @@ def start(bot, update):
 
 #Calculate function
 def calculate(bot, update, args):
+
     bot.sendMessage(chat_id=update.message.chat_id, text="Risultato: ")
