@@ -9,7 +9,6 @@ from telegram.error import (TelegramError, Unauthorized, BadRequest, TimedOut, C
 # System libraries
 import yaml
 import re
-import heapq
 
 # Token
 tokenconf = open('config/token.conf', 'r').read()
@@ -93,12 +92,18 @@ def binary_to_dec(n):
 
 #Decimal to binary command
 def dec_to_binary_command(bot, update, args):
-    message = dec_to_binary(int(args[0]))
+    if(re.match('^[0-9]*$', args[0])):        #Regex that check input.
+        message = dec_to_binary(int(args[0]))
+    else:
+        message = "Sintax error. Type /help to more information."
     bot.sendMessage(chat_id=update.message.chat_id, text = message)
 
 #Binary to decimal command
 def binary_to_dec_command(bot, update, args):
-    message = binary_to_dec(str(args[0]))
+    if(re.match('^[0-1]*$', args[0])):       #Regex that check input.
+        message = binary_to_dec(str(args[0]))
+    else:
+        message = "Sintax error. Type /help to more information."
     bot.sendMessage(chat_id=update.message.chat_id, text = message)
 
 #Start command
