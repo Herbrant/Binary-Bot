@@ -14,8 +14,9 @@ def main():
 
 	#Bot Command
 	dp.add_handler(CommandHandler('start', start))
-	dp.add_handler(CommandHandler('calculate', calculate, pass_args=True))
-	
+	#dp.add_handler(CommandHandler('calculate', calculate, pass_args=True))
+	dp.add_handler(CommandHandler('bin', dec_to_binary_command, pass_args=True))
+	dp.add_handler(CommandHandler('dec', binary_to_dec_command, pass_args=True))
 
 
 	updater.start_polling()

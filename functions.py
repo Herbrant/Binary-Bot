@@ -77,24 +77,30 @@ class operation:
         return False
 
 
-
-
-#Start function
-def start(bot, update):
-    bot.sendMessage(chat_id=update.message.chat_id, text="Hi! I'm Binary Bot and I can manipulate binary number. If you want to know what you can do, use /help")
-
 #Decimal to binary function
-def dec2binary(n):
+def dec_to_binary(n):
     if n == 0:
         return '0'
     else:
-        return dec2binary(n // 2) + str(n%2)
+        return dec_to_binary(n // 2) + str(n%2)
+
+#Binary to decimal function
+def binary_to_dec(n):
+    return int(n,2)
 
 
-#Calculate function
-def calculate(bot, update, args):
-    i = 0
-    while(i < len(args)):
-        
-        
-    bot.sendMessage(chat_id=update.message.chat_id, text="Risultato: ")
+#Bot Command
+
+#Decimal to binary command
+def dec_to_binary_command(bot, update, args):
+    message = dec_to_binary(int(args[0]))
+    bot.sendMessage(chat_id=update.message.chat_id, text = message)
+
+#Binary to decimal command
+def binary_to_dec_command(bot, update, args):
+    message = binary_to_dec(str(args[0]))
+    bot.sendMessage(chat_id=update.message.chat_id, text = message)
+
+#Start command
+def start(bot, update):
+    bot.sendMessage(chat_id=update.message.chat_id, text="Hi! I'm Binary Bot and I can manipulate binary number. If you want to know what you can do, use /help")
