@@ -53,6 +53,7 @@ class operation:
             return self.num1 / self.num2
         else:
             return "-1"
+
     #Overloading operator
     def __eq__(self, other):
         if self.priority == other.priority:
@@ -82,7 +83,18 @@ class operation:
 def start(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Hi! I'm Binary Bot and I can manipulate binary number. If you want to know what you can do, use /help")
 
+#Decimal to binary function
+def dec2binary(n):
+    if n == 0:
+        return '0'
+    else:
+        return dec2binary(n // 2) + str(n%2)
+
+
 #Calculate function
 def calculate(bot, update, args):
-
+    i = 0
+    while(i < len(args)):
+        
+        
     bot.sendMessage(chat_id=update.message.chat_id, text="Risultato: ")
