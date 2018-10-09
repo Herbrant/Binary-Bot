@@ -91,7 +91,9 @@ def binary_to_dec(n):
 
 #Decimal to binary command
 def dec_to_binary_cmd(bot, update, args):
-    if(re.match('^[0-9]*$', args[0])):        #Regex that check input.
+    if not(args):
+        message = "BANANA"
+    if(re.match('^[0-9]+$', args[0])):        #Regex that check input.
         message = dec_to_binary(int(args[0]))
     else:
         message = "Sintax error. Type /help to more information."
@@ -99,7 +101,7 @@ def dec_to_binary_cmd(bot, update, args):
 
 #Binary to decimal command
 def binary_to_dec_cmd(bot, update, args):
-    if(re.match('^[0-1]*$', args[0])):       #Regex that check input.
+    if(re.match('^[0-1]+$', args[0])):       #Regex that check input.
         message = binary_to_dec(str(args[0]))
     else:
         message = "Sintax error. Type /help to more information."
@@ -112,12 +114,20 @@ def start_cmd(bot, update):
 
 def button(bot, update):
     query = update.callback_query
+    chat_id = query.message.chat_id
+    message_id = query.message.message_id
+    data = query.data
     
-
+    if data == "calculate":
+        bot.editMessageText(text = "Scrivi /calculate inserendo come parametro un'espressione da calcolare.", chat_id = chat_id, message_id = message_id)
+    elif data == "bin":
+        bot.editMessageText(text = "Scrivi /bin inserendo come parametro un numero decimale da convertire in binario.", chat_id = chat_id, message_id = message_id)
+    elif data == "dec":
+        bot.editMessageText("Scrivi /dec inserendo come parametro un numero binario da convertire in decimale.", chat_id = chat_id, message_id = message_id)
 
 def help_cmd(bot, update):
-    keyboard = [[InlineKeyboardButton("Calculate", callback_data='/calculate')],
-                [InlineKeyboardButton("Decimal to Binary", callback_data='/bin'),InlineKeyboardButton("Binary to Decimal", callback_data='/dec')]]
+    keyboard = [[InlineKeyboardButton("Calculate", callback_data="calculate")],
+                [InlineKeyboardButton("Decimal to Binary", callback_data="bin"),InlineKeyboardButton("Binary to Decimal", callback_data="dec")]]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 

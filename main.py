@@ -17,7 +17,7 @@ def main():
 	#dp.add_handler(CommandHandler('calculate', calculate, pass_args=True))
 	dp.add_handler(CommandHandler('bin', dec_to_binary_cmd, pass_args=True))
 	dp.add_handler(CommandHandler('dec', binary_to_dec_cmd, pass_args=True))
-	updater.dispatcher.add_handler(CallbackQueryHandler(button))
+	dp.add_handler(CallbackQueryHandler(button))
 	dp.add_handler(CommandHandler('help', help_cmd))
 
 	updater.start_polling()
