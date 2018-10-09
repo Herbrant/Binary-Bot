@@ -4,7 +4,6 @@
 import telegram
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, Filters, MessageHandler, CommandHandler, CallbackQueryHandler, RegexHandler
-from telegram.error import (TelegramError, Unauthorized, BadRequest, TimedOut, ChatMigrated, NetworkError)
 
 # System libraries
 import yaml
@@ -91,7 +90,7 @@ def binary_to_dec(n):
 #Bot Command
 
 #Decimal to binary command
-def dec_to_binary_command(bot, update, args):
+def dec_to_binary_cmd(bot, update, args):
     if(re.match('^[0-9]*$', args[0])):        #Regex that check input.
         message = dec_to_binary(int(args[0]))
     else:
@@ -99,7 +98,7 @@ def dec_to_binary_command(bot, update, args):
     bot.sendMessage(chat_id=update.message.chat_id, text = message)
 
 #Binary to decimal command
-def binary_to_dec_command(bot, update, args):
+def binary_to_dec_cmd(bot, update, args):
     if(re.match('^[0-1]*$', args[0])):       #Regex that check input.
         message = binary_to_dec(str(args[0]))
     else:
@@ -107,5 +106,19 @@ def binary_to_dec_command(bot, update, args):
     bot.sendMessage(chat_id=update.message.chat_id, text = message)
 
 #Start command
-def start(bot, update):
+def start_cmd(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Hi! I'm Binary Bot and I can manipulate binary number. If you want to know what you can do, use /help")
+
+
+def button(bot, update):
+    query = update.callback_query
+    
+
+
+def help_cmd(bot, update):
+    keyboard = [[InlineKeyboardButton("Calculate", callback_data='/calculate')],
+                [InlineKeyboardButton("Decimal to Binary", callback_data='/bin'),InlineKeyboardButton("Binary to Decimal", callback_data='/dec')]]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    update.message.reply_text('@Binary_Bot commands:', reply_markup = reply_markup)
