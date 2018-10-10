@@ -110,6 +110,15 @@ def start_cmd(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Hi! I'm Binary Bot and I can manipulate binary number. If you want to know what you can do, use /help")
 
 
+#Help command
+def help_cmd(bot, update):
+    keyboard = [[InlineKeyboardButton("Calculate", callback_data="calculate")],
+                [InlineKeyboardButton("Decimal to Binary", callback_data="bin"),InlineKeyboardButton("Binary to Decimal", callback_data="dec")]]
+
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    update.message.reply_text('@Binary_Bot commands:', reply_markup = reply_markup)
+
 def button(bot, update):
     query = update.callback_query
     chat_id = query.message.chat_id
@@ -122,11 +131,3 @@ def button(bot, update):
         bot.editMessageText(text = "Scrivi /bin inserendo come parametro un numero decimale da convertire in binario.", chat_id = chat_id, message_id = message_id)
     elif data == "dec":
         bot.editMessageText("Scrivi /dec inserendo come parametro un numero binario da convertire in decimale.", chat_id = chat_id, message_id = message_id)
-
-def help_cmd(bot, update):
-    keyboard = [[InlineKeyboardButton("Calculate", callback_data="calculate")],
-                [InlineKeyboardButton("Decimal to Binary", callback_data="bin"),InlineKeyboardButton("Binary to Decimal", callback_data="dec")]]
-
-    reply_markup = InlineKeyboardMarkup(keyboard)
-
-    update.message.reply_text('@Binary_Bot commands:', reply_markup = reply_markup)
