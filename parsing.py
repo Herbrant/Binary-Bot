@@ -1,31 +1,42 @@
 import re
 
+#Function that controls if str is a binary
 def is_binary(str):
     if re.match("^[0-1]*$", str):
         return True
     return False
 
+#Function that controls if str is an operation
 def is_name(str):
-    if re.match("\W+", str):
+    if re.match("\w+", str):
         return True
     return False
 
+#Function that return stack[-1] if stack is not empy else return None
 def peek(stack):
     return stack[-1] if stack else None
- 
+
+#Function that append operation result in values stack
 def apply_operator(operators, values):
     operator = operators.pop()
     right = values.pop()
     left = values.pop()
-    
-    values.append(eval("{0}{1}{2}".format(left, operator, right)))
+    if operator == '+':
+        values.append(sum(left, right))
+    elif operator == '-':
+        values.append(diff(left, right))
+    elif operator == '*':
+        values.append(multy(left, right))
+    elif operator == '/':
+        values.append(div(left, right))
  
 def greater_precedence(op1, op2):
     precedences = {'+' : 0, '-' : 0, '*' : 1, '/' : 1}
     return precedences[op1] > precedences[op2]
  
 def evaluate(expression):
-    tokens = re.findall("[+\/*()-]|[0-1]+", expression)
+
+    tokens = re.findall("[+/*()-]|[0-1]+", expression)
     values = []
     operators = []
     for token in tokens:
@@ -52,3 +63,4 @@ def evaluate(expression):
     return values[0]
 
 
+print (evaluate("2+3+1+5"))

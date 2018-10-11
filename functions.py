@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
+from parsing import *
 
 # Telegram
 import telegram
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, Filters, MessageHandler, CommandHandler, CallbackQueryHandler, RegexHandler
 
-# System libraries
-import re
 
 # Token
 tokenconf = open('config/token.conf', 'r').read()
@@ -14,63 +13,6 @@ tokenconf = tokenconf.replace("\n", "")
 
 # Token of your telegram bot that you created from @BotFather, write it on token.conf
 TOKEN = tokenconf
-
-#Class Binary number
-class binary:
-    def __init__(self, number):
-        self.number = number
-    def __add__(self, other):
-        return binary(self.number + other.number)   #Use relative function
-    def __sub__(self, other):
-        return binary(self.number - other.number)   #Use relative function
-    def __mul__(self, other):
-        return binary(self.number * other.number)   #Use relative function
-    def __truediv__(self, other):
-        return binary(self.number / other.number)   #Use relative function
-    def __str__(self):      #String rappresentation
-        return self.number
-
-#Class Operation
-class operation:
-    def __init__(self, num1, num2, op, priority):
-        self.num1 = num1
-        self.num2 = num2
-        self.op = op
-        self.priority = priority
-    def result(self):
-        if self.op== '+':
-            return self.num1 + self.num2
-        elif self.op == '-':
-            return self.num1 - self.num2
-        elif self.op == '*':
-            return self.num1 * self.num2
-        elif self.op == '/':
-            return self.num1 / self.num2
-        else:
-            return "-1"
-
-    #Overloading operator
-    def __eq__(self, other):
-        if self.priority == other.priority:
-            return True
-        return False
-    def __gt__(self, other):
-        if self.priority > other.priority:
-            return True
-        return False
-    def __lt__(self, other):
-        if self.priority < other.priority:
-            return True
-        return False
-    def __ge__(self, other):
-        if self > other | self == other:
-            return True
-        return False
-    def __le__(self, other):
-        if self < other | self == other:
-            return True
-        return False
-
 
 #Decimal to binary function
 def dec_to_binary(n):
