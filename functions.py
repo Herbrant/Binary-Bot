@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from parsing import *
+from evaluate import *
 
 # Telegram
 import telegram
