@@ -86,7 +86,6 @@ def greater_precedence(op1, op2):
     return precedences[op1] > precedences[op2]
  
 def evaluate(expression):
-
     tokens = re.findall("[+/*()-]|[0-1]+", expression)
     values = []
     operators = []

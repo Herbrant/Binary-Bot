@@ -70,3 +70,9 @@ def button(bot, update):
         bot.editMessageText(text = "Scrivi /bin inserendo come parametro un numero decimale da convertire in binario.", chat_id = chat_id, message_id = message_id)
     elif data == "dec":
         bot.editMessageText("Scrivi /dec inserendo come parametro un numero binario da convertire in decimale.", chat_id = chat_id, message_id = message_id)
+
+#Calculate command
+def calculate_cmd(bot, update, args):
+    message = evaluate(str(args[0]))
+
+    bot.sendMessage(chat_id = update.message.chat_id, text = message)
