@@ -1,45 +1,55 @@
 import re
 
 #Binary sum
-def binary_sum(a, b):
-    len_max = max(len(a), len(b))
-
-    a = a.zfill(len_max)
-    b = b.zfill(len_max)
+def binary_sum(a,b):
+    maxlen = max(len(str(a)), len(str(b)))
+    #Normalize lengths
+    a = a.zfill(maxlen)
+    b = b.zfill(maxlen)
 
     result = ''
     carry = 0
 
-    for i in range(len_max - 1, -1, -1):
+    for i in range(maxlen-1, -1, -1):
         r = carry
-        if a[i] == '1':
-            r += 1
-        if b[i] == '1':
-            r += 1
-        if(r % 2 == 1):
-            result += 1
-        if r < 2:
-            carry = 0
-        else:
-            carry = 1
-    if carry != 0:
-        result = '1' + carry
-    return result.rzfill(len_max)
+        r += 1 if a[i] == '1' else 0
+        r += 1 if b[i] == '1' else 0
 
+        result = ('1' if r % 2 == 1 else '0') + result
+        carry = 0 if r < 2 else 1       
+
+    if carry !=0 : result = '1' + result
+
+    return result.zfill(maxlen)
 #Binary subtraction
-def binary_sub(a, b):
-    result = ''
-    carry = 0
 
-    for i in range(len_max - 1, -1, -1):
-        r = carry
-        if a[i] == '1' and b[i] == '1':
-            result += '0'
-        elif a[i] == '1' and b[i] == '0':
-            result += '1'
-        elif a[i] == '0' and b[i] == '0':
-            result += '0'
-        elif a[]
+#Binary multiply
+def binary_multiply(a, b):
+    sum = "0"
+
+    maxlen = max(len(str(a)), len(str(b)))
+
+    #Normalize lengths
+    a = a.zfill(maxlen)
+    b = b.zfill(maxlen)
+
+    for i in range(len(str(b)) - 1,-1, -1):
+        partial = ""
+        for j in range(0 , len(str(a)), 1):
+            if a[j] == '1' and b[i] == '1':
+                partial += '1'
+            elif a[j] == '1' and b[i] == '0':
+                partial += '0'
+            elif a[j] == '0' and b[i] == '1':
+                partial += '0'
+            elif a[j] == '0' and b[j] == '0':
+                partial += '0'
+        partial += '0'*(len(b) - i - 1)
+        sum = binary_sum(sum, partial)
+    return sum.zfill(maxlen)
+        
+#Binary division
+
 
 #Function that controls if str is a binary
 def is_binary(str):
@@ -67,7 +77,7 @@ def apply_operator(operators, values):
     elif operator == '-':
         values.append(binary_sub(left, right))
     elif operator == '*':
-        values.append(multy(left, right))
+        values.append(binary_multiply(left, right))
     elif operator == '/':
         values.append(div(left, right))
  
@@ -82,7 +92,7 @@ def evaluate(expression):
     operators = []
     for token in tokens:
         if is_binary(token):
-            values.append(int(token))
+            values.append(token)
         elif token == '(':
             operators.append(token)
         elif token == ')':
@@ -102,6 +112,3 @@ def evaluate(expression):
         apply_operator(operators, values)
  
     return values[0]
-
-
-print (evaluate("2+3+1+5"))
