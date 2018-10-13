@@ -1,5 +1,16 @@
 import re
 
+#Binary comparison operators
+def is_greater(a, b):
+    maxlen = max(len(str(a)), len(str(b)))
+    #Normalize lengths
+    a = a.zfill(maxlen)
+    b = b.zfill(maxlen)
+
+    for i in range(0, maxlen, 1):
+        if a[i] > b[i]:
+            return True
+    return False
 #Binary sum
 def binary_sum(a,b):
     maxlen = max(len(str(a)), len(str(b)))
@@ -23,6 +34,10 @@ def binary_sum(a,b):
     return result.zfill(maxlen)
 #Binary subtraction
 def binary_sub(a,b):
+    bitsign = 0
+    if is_greater(b, a)
+        bitsign = 1
+        swap(a, b)
     maxlen = max(len(str(a)), len(str(b)))
     #Normalize lengths
     a = a.zfill(maxlen)
@@ -55,7 +70,10 @@ def binary_sub(a,b):
             else:
                 result = '0' + result
                 carry = 1
-
+    if bitsign:
+        result = '1' + result
+    else:
+        result = '0' + result
     return result
 
 #Binary multiply
