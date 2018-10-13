@@ -4,7 +4,7 @@ from evaluate import *
 # Telegram
 import telegram
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, Filters, MessageHandler, CommandHandler, CallbackQueryHandler, RegexHandler
+from telegram.ext import Updater, MessageHandler, CommandHandler, CallbackQueryHandler
 
 
 # Token
