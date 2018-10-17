@@ -21,6 +21,23 @@ def dec_to_binary(n):
     else:
         return dec_to_binary(n // 2) + str(n%2)
 
+#Binary to two's complement function
+def dec_to_two(n):
+    if(n[0] == '+'):
+        return dec_to_binary(int(n[1:]))
+    elif n[0] == "-":
+        binary = dec_to_binary(int(n[1:]))
+        binary2 = ""
+        for i in range(len(str(binary)) - 1, -1, -1):
+            if binary[i] == '0':
+                binary2 = '1' + binary2
+            else:
+                binary2 = '0' + binary2
+        return binary_sum(binary2, "01")
+
+    else:
+        return dec_to_binary(int(n))
+
 #Binary to decimal function
 def binary_to_dec(n):
     sum = 0
@@ -36,8 +53,8 @@ def binary_to_dec(n):
 
 #Decimal to binary command
 def dec_to_binary_cmd(bot, update, args):
-    if(re.match('^[0-9]+$', args[0])):        #Regex that check input.
-        message = dec_to_binary(int(args[0]))
+    if(re.match('^[-|+]?[0-9]+$', args[0])):        #Regex that check input.
+        message = dec_to_two(args[0])
     else:
         message = "Sintax error. Type /help to more information."
     bot.sendMessage(chat_id=update.message.chat_id, text = message)
