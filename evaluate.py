@@ -11,6 +11,18 @@ def is_greater(a, b):
         if a[i] > b[i]:
             return True
     return False
+
+#Reverse binary number function
+def binary_reverse(a):
+    reverse = ""
+
+    for i in range(len(str(a)) - 1, -1, -1):
+        if a[i] == '0':
+            reverse = '1' + reverse
+        else:
+            reverse = '0' + reverse
+    return binary_sum(reverse, "01")
+
 #Binary sum
 def binary_sum(a,b):
     maxlen = max(len(str(a)), len(str(b)))
@@ -32,52 +44,20 @@ def binary_sum(a,b):
         result = ('1' if r % 2 == 1 else '0') + result
         carry = 0 if r < 2 else 1
 
-    if (signequal == '0') & (result[0] != signequal):
+    if (signequal == '0') & (result[0] != signequal):   #Signbit check1
         result = '0' + result
-    elif (signequal == '1') & (result[0] != signequal):
+    elif (signequal == '1') & (result[0] != signequal): #Signbit check2
         result = '1' + result
 
     return result.zfill(maxlen)
+
 #Binary subtraction
 def binary_sub(a,b):
     maxlen = max(len(str(a)), len(str(b)))
     #Normalize lengths
     a = a.zfill(maxlen)
     b = b.zfill(maxlen)
-
-
-    result = ''
-    carry = 0
-
-    for i in range(maxlen - 1, -1, -1):
-        if a[i] == '1' and b[i] == '0':     #[1-0]
-            if carry == 0:
-                result = '1' + result
-            else:
-                result = '0' + result
-                carry = 0
-        elif a[i] == '1' and b[i] == '1':    #[1-1]
-            if carry == 0:
-                result = '0' + result
-            else:
-                result = '1' + result
-        elif a[i] == '0' and b[i] == '0':    #[0-0]
-            if carry == 0:
-                result = '0' + result
-            else:
-                result = result + '1'
-        elif a[i] == '0' and b[i] == '1':    #[0-1]
-            if carry == 0:
-                result = '1' + result
-                carry = 1
-            else:
-                result = '0' + result
-                carry = 1
-    if bitsign:
-        result = '1' + result
-    else:
-        result = '0' + result
-    return result
+    return binary_sum(a, binary_reverse(b))
 
 #Binary multiply
 def binary_multiply(a, b):
