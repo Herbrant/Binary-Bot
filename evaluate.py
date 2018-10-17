@@ -14,11 +14,13 @@ def is_greater(a, b):
 #Binary sum
 def binary_sum(a,b):
     maxlen = max(len(str(a)), len(str(b)))
+    signequal = -1
+    if a[0] == b[0]:
+        signequal = a[0]
     #Normalize lengths
     a = a.zfill(maxlen)
     b = b.zfill(maxlen)
-    print(a)
-    print(b)
+
     result = ''
     carry = 0
 
@@ -30,7 +32,10 @@ def binary_sum(a,b):
         result = ('1' if r % 2 == 1 else '0') + result
         carry = 0 if r < 2 else 1
 
-    if carry !=0 : result = '1' + result
+    if (signequal == '0') & (result[0] != signequal):
+        result = '0' + result
+    elif (signequal == '1') & (result[0] != signequal):
+        result = '1' + result
 
     return result.zfill(maxlen)
 #Binary subtraction

@@ -96,6 +96,7 @@ def button(bot, update):
 
 #Calculate command
 def calculate_cmd(bot, update, args):
-    message = evaluate(str(args[0]))
+    val = evaluate(str(args[0]))
+    message = str(val) + " (" + str(binary_to_dec(val)) + ")"
 
     bot.sendMessage(chat_id = update.message.chat_id, text = message)
