@@ -23,7 +23,13 @@ def dec_to_binary(n):
 
 #Binary to decimal function
 def binary_to_dec(n):
-    return int(n,2)
+    sum = 0
+    if n[0] == '1':
+        sum += (2**(len(str(n)) - 1))* -1
+    for i in range(1, len(str(n)), 1):
+        if n[i] == '1':
+            sum += 2**(len(str(n)) - 1 - i)
+    return sum
 
 
 #Bot Command
@@ -63,7 +69,7 @@ def button(bot, update):
     chat_id = query.message.chat_id
     message_id = query.message.message_id
     data = query.data
-    
+
     if data == "calculate":
         bot.editMessageText(text = "Scrivi /calculate inserendo come parametro un'espressione da calcolare.", chat_id = chat_id, message_id = message_id)
     elif data == "bin":
