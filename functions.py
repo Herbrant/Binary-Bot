@@ -14,41 +14,6 @@ tokenconf = tokenconf.replace("\n", "")
 # Token of your telegram bot that you created from @BotFather, write it on token.conf
 TOKEN = tokenconf
 
-#Decimal to binary function
-def dec_to_binary(n):
-    if n == 0:
-        return '0'
-    else:
-        return dec_to_binary(n // 2) + str(n%2)
-
-#Binary to two's complement function
-def dec_to_two(n):
-    if(n[0] == '+'):
-        return dec_to_binary(int(n[1:]))
-    elif n[0] == "-":
-        binary = dec_to_binary(int(n[1:]))
-        binary2 = ""
-        for i in range(len(str(binary)) - 1, -1, -1):
-            if binary[i] == '0':
-                binary2 = '1' + binary2
-            else:
-                binary2 = '0' + binary2
-        return binary_sum(binary2, "01")
-
-    else:
-        return dec_to_binary(int(n))
-
-#Binary to decimal function
-def binary_to_dec(n):
-    sum = 0
-    if n[0] == '1':
-        sum += (2**(len(str(n)) - 1))* -1
-    for i in range(1, len(str(n)), 1):
-        if n[i] == '1':
-            sum += 2**(len(str(n)) - 1 - i)
-    return sum
-
-
 #Bot Command
 
 #Decimal to binary command

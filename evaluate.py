@@ -1,4 +1,39 @@
 import re
+import math
+
+#Decimal to binary function
+def dec_to_binary(n):
+    if n == 0:
+        return '0'
+    else:
+        return dec_to_binary(n // 2) + str(n%2)
+
+#Binary to two's complement function
+def dec_to_two(n):
+    if(n[0] == '+'):
+        return dec_to_binary(int(n[1:]))
+    elif n[0] == "-":
+        binary = dec_to_binary(int(n[1:]))
+        binary2 = ""
+        for i in range(len(str(binary)) - 1, -1, -1):
+            if binary[i] == '0':
+                binary2 = '1' + binary2
+            else:
+                binary2 = '0' + binary2
+        return binary_sum(binary2, "01")
+
+    else:
+        return dec_to_binary(int(n))
+
+#Two's complement to decimal function
+def binary_to_dec(n):
+    sum = 0
+    if n[0] == '1':
+        sum += (2**(len(str(n)) - 1))* -1
+    for i in range(1, len(str(n)), 1):
+        if n[i] == '1':
+            sum += 2**(len(str(n)) - 1 - i)
+    return sum
 
 #Normalize lengths Function
 def normalizelen(a, b):
@@ -72,47 +107,19 @@ def binary_sub(a,b):
 
 #Binary multiply
 def binary_multiply(a, b):
-    sum = "0"
+    pos = abs(binary_to_dec(b))
+    for i in range(0, pos - 1, 1):
+        a = a + '0'
 
-    maxlen = max(len(str(a)), len(str(b)))
-
-    #Normalize lengths
-    a = a.zfill(maxlen)
-    b = b.zfill(maxlen)
-    print(a)
-    print(b)
-    for i in range(len(str(b)) - 1,-1, -1):
-        partial = ""
-        for j in range(0 , len(str(a)), 1):
-            if a[j] == '1' and b[i] == '1':
-                partial += '1'
-            elif a[j] == '1' and b[i] == '0':
-                partial += '0'
-            elif a[j] == '0' and b[i] == '1':
-                partial += '0'
-            elif a[j] == '0' and b[j] == '0':
-                partial += '0'
-        partial += '0'*(len(b) - i - 1)
-
-        sum = binary_sum(sum, partial)
-        print (sum)
-
-    return sum
+    return a
 
 #Binary division
 def binary_div(a, b):
-    result = ""
-    maxlen = max(len(str(a)), len(str(b)))
-    a = a.zfill(maxlen)
-    b = b.zfill(maxlen)
-    print("a: " + a + " b:" + b)
-    while(is_greater(a,b) or a == b):
-        if(is_greater(a,b)):
-            result = result + "1"
-        else:
-            result = result + "0"
-        a = binary_sub(a,b)
-    return result.zfill(maxlen)
+    pos = abs(binary_to_dec(b))
+    for i in range(0, pos - 1, 1):
+        a = a[0] + a
+
+    return a
 #Shunting-yard algorithm (Edger Dijkstra).
 
 #Function that controls if str is a binary
