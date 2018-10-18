@@ -1,11 +1,20 @@
 import re
 
+#Normalize lengths Function
+def normalizelen(a, b):
+    maxlen = max(len(str(a)), len(str(b)))
+
+    for i in range(0, maxlen - len(str(a)), 1):
+        a = a[0] + a
+    for i in range(0, maxlen - len(str(b)), 1):
+        b = b[0] + b
+    return (a,b)
+
 #Binary comparison operators
 def is_greater(a, b):
     maxlen = max(len(str(a)), len(str(b)))
     #Normalize lengths
-    a = a.zfill(maxlen)
-    b = b.zfill(maxlen)
+
     if a[0] == '0' and b[0] == '1':
         return True
     elif a[0] == '1' and b[0] == '0':
@@ -34,33 +43,31 @@ def binary_sum(a,b):
     if a[0] == b[0]:
         signequal = a[0]
     #Normalize lengths
-    a = a.zfill(maxlen)
-    b = b.zfill(maxlen)
+    (a,b) = normalizelen(a,b)
 
     result = ''
     carry = 0
 
-    for i in range(maxlen-1, -1, -1):
+    for i in range(maxlen - 1, -1, -1):
         r = carry
         r += 1 if a[i] == '1' else 0
         r += 1 if b[i] == '1' else 0
 
         result = ('1' if r % 2 == 1 else '0') + result
         carry = 0 if r < 2 else 1
+    if carry !=0 : result = '1' + result[1:]
 
     if (signequal == '0') & (result[0] != signequal):   #Signbit check1
-        result = '0' + result[1:]
+        result = '0' + result
     elif (signequal == '1') & (result[0] != signequal): #Signbit check2
-        result = '1' + result[1:]
+        result = '1' + result
 
-    return result.zfill(maxlen)
+    return result
 
 #Binary subtraction
 def binary_sub(a,b):
-    maxlen = max(len(str(a)), len(str(b)))
     #Normalize lengths
-    a = a.zfill(maxlen)
-    b = b.zfill(maxlen)
+    (a,b) = normalizelen(a,b)
     return binary_sum(a, binary_reverse(b))
 
 #Binary multiply
@@ -72,7 +79,8 @@ def binary_multiply(a, b):
     #Normalize lengths
     a = a.zfill(maxlen)
     b = b.zfill(maxlen)
-
+    print(a)
+    print(b)
     for i in range(len(str(b)) - 1,-1, -1):
         partial = ""
         for j in range(0 , len(str(a)), 1):
@@ -85,8 +93,11 @@ def binary_multiply(a, b):
             elif a[j] == '0' and b[j] == '0':
                 partial += '0'
         partial += '0'*(len(b) - i - 1)
+
         sum = binary_sum(sum, partial)
-    return sum.zfill(maxlen)
+        print (sum)
+
+    return sum
 
 #Binary division
 def binary_div(a, b):
@@ -96,7 +107,6 @@ def binary_div(a, b):
     b = b.zfill(maxlen)
     print("a: " + a + " b:" + b)
     while(is_greater(a,b) or a == b):
-        #print("a: " + a + " b:" + b)
         if(is_greater(a,b)):
             result = result + "1"
         else:
