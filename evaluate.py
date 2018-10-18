@@ -6,10 +6,14 @@ def is_greater(a, b):
     #Normalize lengths
     a = a.zfill(maxlen)
     b = b.zfill(maxlen)
-
-    for i in range(0, maxlen, 1):
-        if a[i] > b[i]:
-            return True
+    if a[0] == '0' and b[0] == '1':
+        return True
+    elif a[0] == '1' and b[0] == '0':
+        return False
+    else:
+        for i in range(0, maxlen, 1):
+            if a[i] > b[i]:
+                return True
     return False
 
 #Reverse binary number function
@@ -45,9 +49,9 @@ def binary_sum(a,b):
         carry = 0 if r < 2 else 1
 
     if (signequal == '0') & (result[0] != signequal):   #Signbit check1
-        result = '0' + result
+        result = '0' + result[1:]
     elif (signequal == '1') & (result[0] != signequal): #Signbit check2
-        result = '1' + result
+        result = '1' + result[1:]
 
     return result.zfill(maxlen)
 
@@ -85,7 +89,20 @@ def binary_multiply(a, b):
     return sum.zfill(maxlen)
 
 #Binary division
-
+def binary_div(a, b):
+    result = ""
+    maxlen = max(len(str(a)), len(str(b)))
+    a = a.zfill(maxlen)
+    b = b.zfill(maxlen)
+    print("a: " + a + " b:" + b)
+    while(is_greater(a,b) or a == b):
+        #print("a: " + a + " b:" + b)
+        if(is_greater(a,b)):
+            result = result + "1"
+        else:
+            result = result + "0"
+        a = binary_sub(a,b)
+    return result.zfill(maxlen)
 #Shunting-yard algorithm (Edger Dijkstra).
 
 #Function that controls if str is a binary
@@ -116,7 +133,7 @@ def apply_operator(operators, values):
     elif operator == '*':
         values.append(binary_multiply(left, right))
     elif operator == '/':
-        values.append(div(left, right))
+        values.append(binary_div(left, right))
 
 def greater_precedence(op1, op2):
     precedences = {'+' : 0, '-' : 0, '*' : 1, '/' : 1}
