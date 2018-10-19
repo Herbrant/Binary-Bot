@@ -1,5 +1,4 @@
 import re
-import math
 
 #Decimal to binary function
 def dec_to_binary(n):
@@ -106,11 +105,29 @@ def binary_sub(a,b):
 
 #Binary multiply
 def binary_multiply(a, b):
-    pos = abs(binary_to_dec(b))
-    for i in range(0, pos - 1, 1):
-        a = a + '0'
+    sum = "0"
 
-    return a
+    maxlen = max(len(str(a)), len(str(b)))
+
+    #Normalize lengths
+    (a,b) = normalizelen(a,b)
+    tmp = len(a)
+    for i in range(len(str(b)) - 1,-1, -1):/calculate 010*0100
+        partial = ""
+        for j in range(0 , len(str(a)), 1):
+            if a[j] == '1' and b[i] == '1':
+                partial += '1'
+            elif a[j] == '1' and b[i] == '0':
+                partial += '0'
+            elif a[j] == '0' and b[i] == '1':
+                partial += '0'
+            elif a[j] == '0' and b[j] == '0':
+                partial += '0'
+        partial = partial[0]*tmp + partial + '0'*(len(b) - i - 1)
+        tmp = tmp - 1
+        sum = binary_sum(sum, partial)
+
+    return sum
 
 #Binary division
 def binary_div(a, b):
