@@ -90,7 +90,6 @@ def binary_sum(a,b):
 
         result = ('1' if r % 2 == 1 else '0') + result
         carry = 0 if r < 2 else 1
-    if carry !=0 : result = '1' + result[1:]
 
     if (signequal == '0') & (result[0] != signequal):   #Signbit check1
         result = '0' + result
