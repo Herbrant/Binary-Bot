@@ -61,7 +61,10 @@ def button(bot, update):
 
 #Calculate command
 def calculate_cmd(bot, update, args):
-    val = evaluate(str(args[0]))
-    message = str(val) + " (" + str(binary_to_dec(val)) + ")"
+    if re.match("^([0-1]+[+\-*\/][0-1]+)+$", args[0]):          #Regular expression that check input string
+        val = evaluate(str(args[0]))
+        message = str(val) + " (" + str(binary_to_dec(val)) + ")"
+    else:
+        message = "Sintax error. Type /help to more information."
 
     bot.sendMessage(chat_id = update.message.chat_id, text = message)
