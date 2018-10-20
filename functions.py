@@ -53,11 +53,11 @@ def button(bot, update):
     data = query.data
 
     if data == "calculate":
-        bot.editMessageText(text = "Scrivi /calculate inserendo come parametro un'espressione da calcolare.", chat_id = chat_id, message_id = message_id)
+        bot.editMessageText(text = "Type /calculate with expression that you want to calculate (e.g /calculate 1011+010).", chat_id = chat_id, message_id = message_id)
     elif data == "bin":
-        bot.editMessageText(text = "Scrivi /bin inserendo come parametro un numero decimale da convertire in binario.", chat_id = chat_id, message_id = message_id)
+        bot.editMessageText(text = "Type /bin with the decimal number that you want to convert to two's complement binary number (e.g /bin 2).", chat_id = chat_id, message_id = message_id)
     elif data == "dec":
-        bot.editMessageText("Scrivi /dec inserendo come parametro un numero binario da convertire in decimale.", chat_id = chat_id, message_id = message_id)
+        bot.editMessageText("Type /dec with the two's complemente number that you want to converto to decimal number (e.g. /dec 010)", chat_id = chat_id, message_id = message_id)
 
 #Calculate command
 def calculate_cmd(bot, update, args):
