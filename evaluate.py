@@ -110,9 +110,11 @@ def binary_multiply(a, b):
     maxlen = max(len(str(a)), len(str(b)))
 
     #Normalize lengths
-    (a,b) = normalizelen(a,b)
-    tmp = len(a)
-    for i in range(len(str(b)) - 1,-1, -1):/calculate 010*0100
+    for i in range(0, maxlen, 1):
+        a = a[0] + a
+        b = b[0] + b
+
+    for i in range(len(str(b)) - 1,-1, -1):
         partial = ""
         for j in range(0 , len(str(a)), 1):
             if a[j] == '1' and b[i] == '1':
@@ -123,11 +125,10 @@ def binary_multiply(a, b):
                 partial += '0'
             elif a[j] == '0' and b[j] == '0':
                 partial += '0'
-        partial = partial[0]*tmp + partial + '0'*(len(b) - i - 1)
-        tmp = tmp - 1
+        partial = partial + '0'*(len(b) - i - 1)
         sum = binary_sum(sum, partial)
 
-    return sum
+    return sum[-maxlen*2:]
 
 #Binary division
 def binary_div(a, b):
