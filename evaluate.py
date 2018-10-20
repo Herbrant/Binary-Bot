@@ -106,10 +106,10 @@ def binary_sub(a,b):
 #Binary multiply
 def binary_multiply(a, b):
     sum = "0"
-
     maxlen = max(len(str(a)), len(str(b)))
 
     #Normalize lengths
+    (a,b) = normalizelen(a,b)
     for i in range(0, maxlen, 1):
         a = a[0] + a
         b = b[0] + b
