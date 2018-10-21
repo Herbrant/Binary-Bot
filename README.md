@@ -33,8 +33,3 @@ $ python3 main.py
 
 ### License
 This open-source software is published under the GNU General Public License (GNU GPL) version 3. Please refer to the "LICENSE" file of this project for the full text.
-
-### Credits
-This project is made possible thanks to the contributions of:
-
-- [Davide Carnemolla](#gitlab link)
