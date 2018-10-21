@@ -140,11 +140,22 @@ def binary_div(a, b):
         a = a[0] + a
         b = b[0] + b
 
-    for i in range(0, len(str(b)) - 1, 1):
-        a = a[:i+len(str(b)) - 1]           #Arith
+    if b[len(str(b)) - 1] == '1':
+        a = a[:-1]
+        a = binary_sum(a, "01")
+
+    for i in range(len(str(b)) - 2, 0 , -1):
+        print(a)
+        if b[i] == '1':
+            if a[i-len(str(b))+1:] == '1':
+                a = a[:i-len(str(b))+1]
+                a = binary_sum(a, "01")
+            else:
+                a = a[:i-len(str(b))+1]
+
+
 
     return a
-
 #Shunting-yard algorithm (Edger Dijkstra).
 
 #Function that controls if str is a binary
@@ -207,3 +218,5 @@ def evaluate(expression):
         apply_operator(operators, values)
 
     return values[0]
+
+print ("Result:" + binary_div("010010", "011"))
