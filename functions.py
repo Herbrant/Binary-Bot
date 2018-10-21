@@ -56,7 +56,7 @@ def button(bot, update):
     elif data == "bin":
         bot.editMessageText(text = "Type /bin with the decimal number that you want to convert to two's complement binary number (e.g /bin 2).", chat_id = chat_id, message_id = message_id)
     elif data == "dec":
-        bot.editMessageText("Type /dec with the two's complement number that you want to converto to decimal number (e.g. /dec 010)", chat_id = chat_id, message_id = message_id)
+        bot.editMessageText("Type /dec with the two's complement number that you want to convert to decimal number (e.g. /dec 010)", chat_id = chat_id, message_id = message_id)
 
 #Calculate command
 def calculate_cmd(bot, update, args):
