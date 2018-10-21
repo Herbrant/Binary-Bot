@@ -25,6 +25,7 @@ If you want to test the bot by creating your personal istance, follow this steps
 #### How to use
 
 Add the API TOKEN in /config/token.conf
+
 Run from shell:
 ```
 $ python3 main.py
