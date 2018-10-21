@@ -48,6 +48,7 @@ def normalizelen(a, b):
 def is_greater(a, b):
     maxlen = max(len(str(a)), len(str(b)))
     #Normalize lengths
+    (a,b) = normalizelen(a,b)
 
     if a[0] == '0' and b[0] == '1':
         return True
@@ -134,28 +135,32 @@ def binary_multiply(a, b):
 def binary_div(a, b):
     maxlen = max(len(str(a)), len(str(b)))
 
+    signa = 0
+    if a[0] == '1':
+        signa = 1
+        a = binary_reverse(a)
+    signb = 0
+    if b[0] == '1':
+        signb = 1
+        b = binary_reverse(b)
+
     #Normalize lengths
     (a,b) = normalizelen(a,b)
     for i in range(0, maxlen, 1):
         a = a[0] + a
         b = b[0] + b
 
-    if b[len(str(b)) - 1] == '1':
-        a = a[:-1]
-        a = binary_sum(a, "01")
+    counter = '0'
 
-    for i in range(len(str(b)) - 2, 0 , -1):
-        print(a)
-        if b[i] == '1':
-            if a[i-len(str(b))+1:] == '1':
-                a = a[:i-len(str(b))+1]
-                a = binary_sum(a, "01")
-            else:
-                a = a[:i-len(str(b))+1]
+    while(is_greater(a, "0")):
+        counter = binary_sum(counter, "01")
+        a = binary_sub(a,b)
 
+    if signa != signb:
+        counter = binary_reverse(counter)
 
+    return counter
 
-    return a
 #Shunting-yard algorithm (Edger Dijkstra).
 
 #Function that controls if str is a binary
@@ -218,5 +223,3 @@ def evaluate(expression):
         apply_operator(operators, values)
 
     return values[0]
-
-print ("Result:" + binary_div("010010", "011"))
