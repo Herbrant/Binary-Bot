@@ -6,7 +6,6 @@ import telegram
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, MessageHandler, CommandHandler, CallbackQueryHandler
 
-
 # Token
 tokenconf = open('config/token.conf', 'r').read()
 tokenconf = tokenconf.replace("\n", "")
@@ -14,8 +13,8 @@ tokenconf = tokenconf.replace("\n", "")
 # Token of your telegram bot that you created from @BotFather, write it on token.conf
 TOKEN = tokenconf
 
-#Bot Command
 
+#Bot Command
 #Decimal to binary command
 def dec_to_binary_cmd(bot, update, args):
     if(re.match('^[-|+]?[0-9]+$', args[0])):        #Regex that check input.

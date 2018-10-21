@@ -7,7 +7,7 @@ def dec_to_binary(n):
     else:
         return dec_to_binary(n // 2) + str(n%2)
 
-#Binary to two's complement function
+#Decimal to two's complement function
 def dec_to_two(n):
     if(n[0] == '+'):
         return dec_to_binary(int(n[1:]))
@@ -132,11 +132,19 @@ def binary_multiply(a, b):
 
 #Binary division
 def binary_div(a, b):
-    pos = abs(binary_to_dec(b))
-    for i in range(0, pos - 1, 1):
+    maxlen = max(len(str(a)), len(str(b)))
+
+    #Normalize lengths
+    (a,b) = normalizelen(a,b)
+    for i in range(0, maxlen, 1):
         a = a[0] + a
+        b = b[0] + b
+
+    for i in range(0, len(str(b)) - 1, 1):
+        a = a[:i+len(str(b)) - 1]           #Arith
 
     return a
+
 #Shunting-yard algorithm (Edger Dijkstra).
 
 #Function that controls if str is a binary
