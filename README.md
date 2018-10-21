@@ -1,6 +1,6 @@
 # Binary-Bot
 
-**Binary-Bot** is the platform that powers **#usarname-bot*, a Telegram bot that make simple operation with binary numbers.
+**Binary-Bot** is the platform that powers [@Binarydmibot](http://telegram.me/binarydmibot), a Telegram bot that make simple operation with binary numbers.
 ### Using the live version
 The bot is live on Telegram with the username #usarname-bot.
 Send **'/start'** to start it, **'/help'** to see a list of commands.
@@ -24,7 +24,7 @@ If you want to test the bot by creating your personal istance, follow this steps
 
 #### How to use
 
-Add the API TOKEN in \_TOKEN\_ (line 6).
+Add the API TOKEN in /config/token.conf
 Run from shell:
 ```
 $ python3 main.py
