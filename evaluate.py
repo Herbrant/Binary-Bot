@@ -150,6 +150,9 @@ def binary_div(a, b):
         a = a[0] + a
         b = b[0] + b
 
+    if is_greater(b, a):        #If a > b approximate to 0.
+        return "0"
+
     counter = '0'
 
     while(is_greater(a, "0")):
