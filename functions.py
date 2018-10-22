@@ -51,7 +51,7 @@ def button(bot, update):
     message_id = query.message.message_id
     data = query.data
 
-    if data == "calculate":Sintax
+    if data == "calculate":
         bot.editMessageText(text = "Type /calculate with expression that you want to calculate (e.g /calculate 1011+010).", chat_id = chat_id, message_id = message_id)
     elif data == "bin":
         bot.editMessageText(text = "Type /bin with the decimal number that you want to convert to two's complement binary number (e.g /bin 2).", chat_id = chat_id, message_id = message_id)
