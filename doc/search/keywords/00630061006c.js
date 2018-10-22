@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("cal",["Function"],[["calculate_cmd",,[[,,,,0,"File:functions.py:calculate_cmd"]]]]);

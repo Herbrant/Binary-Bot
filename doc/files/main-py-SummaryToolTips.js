@@ -1,0 +1,1 @@
+NDSummary.OnToolTipsLoaded("File:main.py",{26:"<div class=\"NDToolTip TFunction LPython\"><div id=\"NDPrototype26\" class=\"NDPrototype NoParameterForm\">def main()</div><div class=\"TTSummary\">Main function that run the bot.</div></div>"});

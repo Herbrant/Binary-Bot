@@ -1,0 +1,1 @@
+NDSearch.OnPrefixDataLoaded("app",["Function"],[["apply_operator",,[[,,,,0,"File:evaluate.py:apply_operator"]]]]);
