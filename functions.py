@@ -15,7 +15,8 @@ TOKEN = tokenconf
 
 
 #Bot Command
-#Decimal to binary command
+#Function: dec_to_binary_cmd
+#Send message of dec_to_two function
 def dec_to_binary_cmd(bot, update, args):
     if(re.match('^[-|+]?[0-9]+$', args[0])):        #Regex that check input.
         message = dec_to_two(args[0])
@@ -23,7 +24,8 @@ def dec_to_binary_cmd(bot, update, args):
         message = "Syntax error. Type /help to more information."
     bot.sendMessage(chat_id=update.message.chat_id, text = message)
 
-#Binary to decimal command
+#Function: binary_to_dec_cmd
+#Send message of binary_to_dec function
 def binary_to_dec_cmd(bot, update, args):
     if(re.match('^[0-1]+$', args[0])):       #Regex that check input.
         message = binary_to_dec(str(args[0]))
@@ -31,12 +33,13 @@ def binary_to_dec_cmd(bot, update, args):
         message = "Syntax error. Type /help to more information."
     bot.sendMessage(chat_id=update.message.chat_id, text = message)
 
-#Start command
+#Function: start_cmd
+#Send message with bot's information
 def start_cmd(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id, text="Hi! I'm Binary Bot and I can manipulate binary numbers. If you want to know what you can do, use /help")
 
-
-#Help command
+#Function: help_cmd
+#Send message with command's information
 def help_cmd(bot, update):
     keyboard = [[InlineKeyboardButton("Calculate", callback_data="calculate")],
                 [InlineKeyboardButton("Decimal to Binary", callback_data="bin"),InlineKeyboardButton("Binary to Decimal", callback_data="dec")]]
@@ -45,6 +48,8 @@ def help_cmd(bot, update):
 
     update.message.reply_text('@binarydmibot commands:', reply_markup = reply_markup)
 
+#Function: button
+#Create button for help_cmd
 def button(bot, update):
     query = update.callback_query
     chat_id = query.message.chat_id
@@ -58,7 +63,8 @@ def button(bot, update):
     elif data == "dec":
         bot.editMessageText("Type /dec with the two's complement number that you want to convert to decimal number (e.g. /dec 010)", chat_id = chat_id, message_id = message_id)
 
-#Calculate command
+#Function: calculate_cmd
+#Send message of evaluate function
 def calculate_cmd(bot, update, args):
     if re.match("^([0-1]+[+\-*\/][0-1]+)+$", args[0]):          #Regular expression that check input string
         val = evaluate(str(args[0]))

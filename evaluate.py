@@ -1,13 +1,15 @@
 import re
 
-#Decimal to binary function
+#Function: dec_to_binary
+#Return binary from decimal number(n).
 def dec_to_binary(n):
     if n == 0:
         return '0'
     else:
         return dec_to_binary(n // 2) + str(n%2)
 
-#Decimal to two's complement function
+#Function: dec_to_two
+#Return two's complement from decimal number(n).
 def dec_to_two(n):
     if(n[0] == '+'):
         return dec_to_binary(int(n[1:]))
@@ -24,7 +26,8 @@ def dec_to_two(n):
     else:
         return dec_to_binary(int(n))
 
-#Two's complement to decimal function
+#Function: binary_to_dec
+#Return decimal from two's complement number.
 def binary_to_dec(n):
     sum = 0
     if n[0] == '1':
@@ -34,7 +37,8 @@ def binary_to_dec(n):
             sum += 2**(len(str(n)) - 1 - i)
     return sum
 
-#Normalize lengths Function
+#Function: normalizelen
+#Return (a,b) normalized.
 def normalizelen(a, b):
     maxlen = max(len(str(a)), len(str(b)))
 
@@ -44,7 +48,8 @@ def normalizelen(a, b):
         b = b[0] + b
     return (a,b)
 
-#Binary comparison operators
+#Function: is_greater
+#Return 1 if a > b, return 0 else.
 def is_greater(a, b):
     maxlen = max(len(str(a)), len(str(b)))
     #Normalize lengths
@@ -60,7 +65,8 @@ def is_greater(a, b):
                 return True
     return False
 
-#Reverse binary number function
+#Function: binary_reverse
+#Return reverse binary number.
 def binary_reverse(a):
     reverse = ""
 
@@ -71,7 +77,8 @@ def binary_reverse(a):
             reverse = '0' + reverse
     return binary_sum(reverse, "01")
 
-#Binary sum
+#Function: binary_sum
+#Return a+b.
 def binary_sum(a,b):
     maxlen = max(len(str(a)), len(str(b)))
     signequal = -1
@@ -98,13 +105,15 @@ def binary_sum(a,b):
 
     return result
 
-#Binary subtraction
+#Function: binary_sub
+#Return a-b.
 def binary_sub(a,b):
     #Normalize lengths
     (a,b) = normalizelen(a,b)
     return binary_sum(a, binary_reverse(b))
 
-#Binary multiply
+#Function: binary_multiply
+#Return a*b.
 def binary_multiply(a, b):
     sum = "0"
     maxlen = max(len(str(a)), len(str(b)))
@@ -131,7 +140,8 @@ def binary_multiply(a, b):
 
     return sum[-maxlen*2:]
 
-#Binary division
+#Function: binary_div
+#Return a/b if a >= b, return 0 else.
 def binary_div(a, b):
     maxlen = max(len(str(a)), len(str(b)))
 
@@ -166,23 +176,27 @@ def binary_div(a, b):
 
 #Shunting-yard algorithm (Edger Dijkstra).
 
-#Function that controls if str is a binary
+#Function: is_binary
+#Return 1 if str is binary, return 0 else.
 def is_binary(str):
     if re.match("^[0-1]*$", str):
         return True
     return False
 
-#Function that controls if str is an operation
+#Function: is_name
+#Return 1 if str is an operator, return 0 else.
 def is_name(str):
     if re.match("\w+", str):
         return True
     return False
 
-#Function that return stack[-1] if stack is not empy else return None
+#Function: peek
+#Return stack[-1] if stack is not empy else return None.
 def peek(stack):
     return stack[-1] if stack else None
 
-#Function that append operation result in values stack
+#Function: apply_operator
+#Function that append operation result in values stack.
 def apply_operator(operators, values):
     operator = operators.pop()
     right = values.pop()
@@ -196,10 +210,14 @@ def apply_operator(operators, values):
     elif operator == '/':
         values.append(binary_div(left, right))
 
+#Function: greater_precedence
+#Function that return precedences operator.
 def greater_precedence(op1, op2):
     precedences = {'+' : 0, '-' : 0, '*' : 1, '/' : 1}
     return precedences[op1] > precedences[op2]
 
+#Function: evaluate
+#Evaluate expression and return result. (Implementation of shunting-yard algorithm)
 def evaluate(expression):
     tokens = re.findall("[+/*()-]|[0-1]+", expression)
     values = []
