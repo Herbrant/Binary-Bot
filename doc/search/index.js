@@ -1,1 +1,0 @@
-NDSearch.OnPrefixIndexLoaded(["app","bin","but","cal","dec","eva","gre","hel","is_","mai","nor","pee","sta"]);

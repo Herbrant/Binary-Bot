@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("nor",["Function"],[["normalizelen",,[[,,,,0,"File:evaluate.py:normalizelen"]]]]);

@@ -1,1 +1,0 @@
-NDSearch.OnPrefixDataLoaded("hel",["Function"],[["help_cmd",,[[,,,,0,"File:functions.py:help_cmd"]]]]);
