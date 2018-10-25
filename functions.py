@@ -70,6 +70,6 @@ def calculate_cmd(bot, update, args):
         val = evaluate(str(args[0]))
         message = str(val) + " (" + str(binary_to_dec(val)) + ")"
     else:
-        message = "Syntax error. Type /help to more information."
+        message = "Syntax error. Type /help for more information."
 
     bot.sendMessage(chat_id = update.message.chat_id, text = message)
