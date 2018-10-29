@@ -2,7 +2,7 @@
 
 **Binary-Bot** is the platform that powers [@Binarydmibot](http://telegram.me/binarydmibot), a Telegram bot that make simple operation with binary numbers.
 ### Using the live version
-The bot is live on Telegram with the username #usarname-bot.
+The bot is live on Telegram with the username [@Binarydmibot](http://telegram.me/binarydmibot).
 Send **'/start'** to start it, **'/help'** to see a list of commands.
 
 
